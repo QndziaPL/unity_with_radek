@@ -31,6 +31,7 @@ public class EnemyRandomMove : MonoBehaviour
 
     void Update()
     {
+        return;
         if ((Vector2)transform.position != destination)
         {
             transform.position = Vector2.MoveTowards(transform.position, destination, Random.Range(minSpeed, maxSpeed) * Time.deltaTime);
@@ -51,19 +52,27 @@ public class EnemyRandomMove : MonoBehaviour
                 StopCoroutine(restoreDefaultColorCoroutine);
             }
             destination = GetTargetDestination();
-            if (sr == null)
+            if (sr != null)
             {
-                Debug.Log("PIZDAAAAA");
+
             }
-            sr.color = new Color32(255, 0, 0, 255);
+            SetColor(new Color32(255, 0, 0, 255));
             restoreDefaultColorCoroutine = StartCoroutine(RestoreDefaultColor());
+        }
+    }
+
+    private void SetColor(Color32 color)
+    {
+        if (sr != null)
+        {
+            sr.color = color;
         }
     }
 
     IEnumerator RestoreDefaultColor()
     {
         yield return new WaitForSeconds(1f);
-        sr.color = new Color32(50, 150, 150, 255);
+        SetColor(new Color32(50, 150, 150, 255));
     }
 
 
