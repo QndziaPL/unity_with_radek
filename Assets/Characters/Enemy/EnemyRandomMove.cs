@@ -31,7 +31,7 @@ public class EnemyRandomMove : MonoBehaviour
 
     void Update()
     {
-        return;
+        // return;
         if ((Vector2)transform.position != destination)
         {
             transform.position = Vector2.MoveTowards(transform.position, destination, Random.Range(minSpeed, maxSpeed) * Time.deltaTime);
