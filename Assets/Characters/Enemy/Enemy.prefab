@@ -122,10 +122,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a90c8e7b32095164784dc898eb530382, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveChance: 0.1
-  minSpeed: 0.1
-  maxSpeed: 0.5
-  maxSingleDestinationDistance: 30
+  moveChance: 0.01
+  minSpeed: 0.2
+  maxSpeed: 2
+  maxSingleDestinationDistance: 10
 --- !u!95 &6034946323726701632
 Animator:
   serializedVersion: 4

@@ -6,16 +6,16 @@ using Random = UnityEngine.Random;
 public class EnemyRandomMove : MonoBehaviour
 {
     [SerializeField]
-    float moveChance = 0.1f;
+    float moveChance = 0.01f;
 
     [SerializeField]
-    float minSpeed = 0.5f;
+    float minSpeed = 0.2f;
 
     [SerializeField]
-    float maxSpeed = 1.5f;
+    float maxSpeed = 2f;
 
     [SerializeField]
-    int maxSingleDestinationDistance = 30;
+    int maxSingleDestinationDistance = 5;
     Vector2 destination;
 
     SpriteRenderer sr;
@@ -31,7 +31,6 @@ public class EnemyRandomMove : MonoBehaviour
 
     void Update()
     {
-        // return;
         if ((Vector2)transform.position != destination)
         {
             transform.position = Vector2.MoveTowards(transform.position, destination, Random.Range(minSpeed, maxSpeed) * Time.deltaTime);
