@@ -24,7 +24,9 @@ public class SwordAttack : MonoBehaviour
     }
     public void AttackLeft()
     {
+        Debug.Log(rightAttackOffset);
         swordCollider.enabled = true;
+        Debug.Log("wali w lewo");
         transform.localPosition = new Vector3(rightAttackOffset.x * -1, rightAttackOffset.y);
     }
 

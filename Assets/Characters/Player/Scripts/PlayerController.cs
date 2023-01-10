@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
-    float moveSpeed = 1f;
+    float moveSpeed = 3f;
     [SerializeField]
     float collisionOffset = 0.05f;
     [SerializeField]
@@ -37,24 +37,14 @@ public class PlayerController : MonoBehaviour
 
         if (movementInput != Vector2.zero)
         {
-            bool success = TryMove(movementInput);
+            rb.velocity = movementInput.normalized * moveSpeed;
 
-            if (!success)
-            {
-                success = TryMove(new Vector2(movementInput.x, 0));
-
-            }
-
-            if (!success)
-            {
-                success = TryMove(new Vector2(0, movementInput.y));
-            }
-
-            animator.SetBool("isMoving", success);
+            animator.SetBool("isMoving", true);
         }
         else
         {
             animator.SetBool("isMoving", false);
+            rb.velocity = Vector2.zero;
         }
 
         if (movementInput.x < 0)
@@ -66,28 +56,6 @@ public class PlayerController : MonoBehaviour
             spriteRenderer.flipX = false;
         }
     }
-
-
-    private bool TryMove(Vector2 direction)
-    {
-        if (direction == Vector2.zero) return false;
-        int count = rb.Cast(
-                direction,
-                movementFilter,
-                castCollisions,
-                moveSpeed * Time.fixedDeltaTime + collisionOffset
-            );
-        if (count == 0)
-        {
-            rb.MovePosition(rb.position + movementInput * moveSpeed * Time.fixedDeltaTime);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
     void OnMove(InputValue movementValue)
     {
         movementInput = movementValue.Get<Vector2>();
@@ -119,7 +87,6 @@ public class PlayerController : MonoBehaviour
 
     public void LockMovement()
     {
-        Debug.Log("locking movement");
         canMove = false;
     }
 
